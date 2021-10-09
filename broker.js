@@ -20,7 +20,7 @@ var connection = mysql.createConnection({
 connection.connect();
 
 server.listen(port_mqtt, function () {
-	console.log('mqtt broker listening on port', port_mqtt)
+	console.log('mqtt broker listening on port : ', port_mqtt)
 })
 ws.createServer({ server: httpServer }, aedes.handle);
 
