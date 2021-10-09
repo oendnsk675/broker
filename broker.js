@@ -7,6 +7,7 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
 const port_mqtt = 1882;
 const port_ws = 8888;
 
+console.log('berhasil dong');
 // db proccess
 var mysql      = require('mysql');
 
