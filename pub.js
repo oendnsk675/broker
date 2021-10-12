@@ -1,6 +1,6 @@
 var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://localhost:1883');
 // var client = mqtt.connect('mqtt://localhost:1882');
+var client = mqtt.connect('mqtt://belajarnode1.herokuapp.com:1882');
 // console.log();
 
 // function randomString(length, chars) {
