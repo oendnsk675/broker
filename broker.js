@@ -21,6 +21,6 @@ for (const name of Object.keys(nets)) {
 }
 
 server.listen(port, function () {
-  console.log('server started and listening on ip ', results)
+  console.log(results)
   console.log('server started and listening on port ', port)
 })
