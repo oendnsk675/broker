@@ -2,6 +2,7 @@ require('module-alias/register')
 let dbQuery = require("@db/query")
 let notification = require("@controllers/notifications")
 let devices = require("@controllers/devices")
+const topicOn = require("@config/mqtt.config.js")
 
 module.exports = (aedes, connection) => {
     aedes.authenticate = function (client, key, password, callback) {
@@ -15,7 +16,7 @@ module.exports = (aedes, connection) => {
                 let id = client.id.split('_')[0]
                 if(idType == 'mc'){
                     // do publish mc connect
-                    aedes.publish({topic:`${id}/mc/status/online`, payload: Buffer.from(`online_${client_name}`)})
+                    aedes.publish({topic:`${id}/${topicOn}`, payload: Buffer.from(`online_${client_name}`)})
                     let message = `Perangkat ${client_name} telah terhubung ke smarttandon anda`
                     notification.sendNewNotification(id, message)
                     devices.sendNewDevices(id, client_name)

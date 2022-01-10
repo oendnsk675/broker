@@ -1,16 +1,15 @@
 var mqtt = require('mqtt');
-var client = mqtt.connect('mqtt://localhost:1882', 
+const {url, api_key, willTopic} = require("../config/mqtt.config")
+var client = mqtt.connect(url, 
             {
-            username : '101037035320208252237',
-            password : '101037035320208252237', 
-            clientId: `101037035320208252237_${randomString(8, '#Ab1')}_mc_tandon1`,
+            username : api_key,
+            password : api_key, 
+            clientId: `${api_key}_${randomString(8, '#Ab1')}_mc_tandon1`,
             will : {
-                topic: 'mc/status/offline',
+                topic: willTopic,
                 payload: Buffer.from(`offline_tandon1`), // Payloads are buffers
             },
         });
-// var client = mqtt.connect('mqtt://localhost:1882');
-// console.log();
 
 function randomString(length, chars) {
     var mask = '';

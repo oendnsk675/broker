@@ -3,9 +3,8 @@ const aedes = require('aedes')();
 const httpServer = require('http').createServer();
 var server = require('net').createServer(aedes.handle);
 const ws = require('websocket-stream');
+const {port_mqtt, port_ws} = require('./config/mqtt.config')
 const mysql      = require('mysql');
-const port_mqtt = 1882;
-const port_ws = 8888;
 
 // db proccess
 let connection = require("@db/index").connection(mysql)
