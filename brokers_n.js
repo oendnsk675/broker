@@ -7,7 +7,6 @@ axios.defaults.baseURL = 'http://127.0.0.1:8000/api';
 const port_mqtt = 1882;
 const port_ws = 8888;
 
-console.log('berhasil dong');
 // db proccess
 var mysql      = require('mysql');
 
@@ -15,13 +14,13 @@ var connection = mysql.createConnection({
     host     : 'localhost',
     user     : 'root',
     password : '',
-    database : 'laravuejwt'
+    database : 'smarttandon'
 });
     
 connection.connect();
-
+console.log(connection);
 server.listen(port_mqtt, function () {
-	console.log('mqtt broker listening on port: ', port_mqtt)
+	console.log('mqtt broker listening on port', port_mqtt)
 })
 ws.createServer({ server: httpServer }, aedes.handle);
 
@@ -45,22 +44,6 @@ function storeData(client){
         let id = res[0] // id user
         let cost = res[1] // cost user
         let month = dt.getMonth()+1;
-        // console.log(id);
-        // cek apakah ada data monthliy user pada bulan ke n (gak jadi)
-        // cekDataExists(id, month, res => {
-        //     // console.log(res);
-        //     if(res > 0){
-        //         connection.query(`UPDATE data_monthlies SET usages = usages + 1 WHERE id_user = '${id}' AND MONTH(created_at) = ${month}`, function (error, results, fields) {
-        //             if (error) throw error;
-        //             console.log('Berhasil update data bulanan');
-        //         });
-        //     }else{
-        //         connection.query(`INSERT INTO data_monthlies (id, usages, id_user, created_at, updated_at) VALUES('', '1', '${id}', '${dts}', '${dts}')`, function (error, results, fields) {
-        //             if (error) throw error;
-        //             console.log('Berhasil insert data bulanan');
-        //         });
-        //     }
-        // })
 
         // cek apakah ada data usage user pada bulan ke n
         cekDataExists(id, month, res => {
@@ -84,7 +67,7 @@ function storeData(client){
 }
 
 function cekDataExists(id_user, month, callback){
-    connection.query(`SELECT id_user FROM data_monthlies WHERE id_user = ${id_user} AND MONTH(created_at) = ${month}`, (err, res) =>{
+    connection.query(`SELECT id_user FROM data_usages WHERE id_user = ${id_user} AND MONTH(created_at) = ${month}`, (err, res) =>{
         if (err) throw err
         if(res.length > 0){
             return callback(1)
